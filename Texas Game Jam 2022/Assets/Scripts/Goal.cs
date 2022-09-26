@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    public int coinsCollected = 0;
-    public int coinsNeeded = 0;
+    public int tokensCollected = 0;
+    public int tokensNeeded = 0;
 
     public Collider2D goalCollider;
     public Collider2D playerCollider;
@@ -13,13 +13,18 @@ public class Goal : MonoBehaviour
     void Start()
     {
         goalCollider = GetComponent<Collider2D>();
-        playerCollider = GameObject.Find("Player").GetComponent<Collider2D>();
+        playerCollider = GameObject.Find("Player").GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (coinsCollected >= coinsNeeded && goalCollider.IsTouching(playerCollider)) {
+        
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other == playerCollider && tokensCollected >= tokensNeeded && playerCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {
             // load the next scene
             GameObject.Find("GameStateManager").GetComponent<GameStateManager>().enterNextScene();
         }
@@ -27,6 +32,6 @@ public class Goal : MonoBehaviour
 
     public void addCoin()
     {
-        coinsCollected++;
+        tokensCollected++;
     }
 }

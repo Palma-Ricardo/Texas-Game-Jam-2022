@@ -6,7 +6,7 @@ public class LevelController : MonoBehaviour
     public PlayerController player;
 
     public bool isNegated = false;
-    public float playerOffset = 1f;
+    public float playerOffset = 1.5f;
 
     public Grid positiveGrid;
     public Grid negativeGrid;
@@ -15,9 +15,6 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goal = GameObject.Find("Goal").GetComponent<Goal>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
-
         goal = GameObject.Find("Goal").GetComponent<Goal>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();  
         isNegated = false;
@@ -55,12 +52,14 @@ public class LevelController : MonoBehaviour
         if (isNegated) {
             player.spriteRenderer.sprite = player.positiveSprite;
             player.spriteRenderer.flipY = false;
+            player.isPositive = true;
 
             player.rb.MovePosition(new Vector2(player.rb.position.x, player.rb.position.y + playerOffset));
             Debug.Log("entering positive space");
         } else {
             player.spriteRenderer.sprite = player.negativeSprite;
             player.spriteRenderer.flipY = true;
+            player.isPositive = false;
 
             player.rb.MovePosition(new Vector2(player.rb.position.x, player.rb.position.y - playerOffset));
             Debug.Log("entering negative space");

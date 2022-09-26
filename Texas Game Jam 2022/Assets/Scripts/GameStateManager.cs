@@ -11,7 +11,6 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
-        levelController = GameObject.Find("LevelController").GetComponent<LevelController>();
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -19,6 +18,12 @@ public class GameStateManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void enterFirstLevel(){
+        SceneManager.LoadScene("Level 1");
+        currentScene = 1;
+        levelController = GameObject.Find("LevelController").GetComponent<LevelController>();
     }
 
     public void enterNextScene()
@@ -32,5 +37,15 @@ public class GameStateManager : MonoBehaviour
     {;
         SceneManager.LoadScene(currentScene);
         levelController = GameObject.Find("LevelController").GetComponent<LevelController>();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void showMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

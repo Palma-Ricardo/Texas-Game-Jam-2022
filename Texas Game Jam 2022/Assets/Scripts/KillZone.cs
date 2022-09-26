@@ -18,7 +18,7 @@ public class KillZone : MonoBehaviour
     void Update()
     {
         // if the player is touching the kill zone, reload the current scene
-        if (coll.IsTouching(GameObject.Find("Player").GetComponent<Collider2D>())) {
+        if (coll.IsTouching(GameObject.Find("Player").GetComponent<BoxCollider2D>())) {
             gameStateManager.reloadCurrentScene();
         }
     }
